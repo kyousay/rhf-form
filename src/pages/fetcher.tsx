@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { Form, useForm } from 'react-hook-form'
 
 type FormSchema = {
@@ -12,16 +13,10 @@ const App = () => {
       action="/api/test"
       method="post"
       control={control}
-      onSuccess={(response) => {
-        console.log('onSuccess', response)
+      fetcher={(action, { values }) => {
+        console.log(action, values)
+        axios.post(action, values)
       }}
-      onError={(response) => {
-        console.log('onError', response)
-      }}
-      onSubmit={(data) => {
-        console.log('onSubmit', data)
-      }}
-      fetcher={(action, { values } => axios.post(action, values))}
     >
       <fieldset>
         <label>
