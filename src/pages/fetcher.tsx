@@ -12,10 +12,14 @@ const App = () => {
     <Form
       action="/api/test"
       method="post"
+      encType="application/json"
       control={control}
       fetcher={(action, { values }) => {
-        console.log(action, values)
-        axios.post(action, values)
+        axios.post(action, JSON.stringify(values), {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
       }}
     >
       <fieldset>
